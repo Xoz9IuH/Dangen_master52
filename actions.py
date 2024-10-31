@@ -1,6 +1,8 @@
 from __future__ import annotations
-
+from pygame import mixer
 from typing import TYPE_CHECKING, Optional, Tuple
+
+import pygame
 
 import color
 import exceptions
@@ -149,8 +151,13 @@ class MeleeAction(ActionWithDirection):
         attack_desc = f"{self.entity.name.capitalize()} attacks {target.name}"
         if self.entity is self.engine.player:
             attack_color = color.player_atk
+            # Загрузка звукового эффекта
+            attack_sound = mixer.Sound('sword.mp3')  
+            attack_sound.set_volume(1.0)  # Установите нужный уровень громкости
+            attack_sound.play()  # Воспроизведение звукового эффекта
         else:
             attack_color = color.enemy_atk
+
 
         if damage > 0:
             self.engine.message_log.add_message(f"{attack_desc} for {damage} hit points.", attack_color)

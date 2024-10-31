@@ -6,7 +6,6 @@ import copy
 import lzma
 import pickle
 import traceback
-
 from PIL import Image  # type: ignore
 import tcod
 
